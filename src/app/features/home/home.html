@@ -1,0 +1,154 @@
+<div class="min-h-screen bg-slate-950 text-white">
+
+  <!-- Navigation -->
+  <nav class="flex items-center justify-between border-b border-white/10 px-6 py-5 lg:px-16">
+
+    <a routerLink="/" class="text-2xl font-bold tracking-tight">
+      Deploy<span class="text-indigo-400">Flow</span>
+    </a>
+
+    <div class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+      <a href="#features" class="transition hover:text-white">Features</a>
+      <a href="#about" class="transition hover:text-white">About</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a
+        routerLink="/login"
+        class="rounded-lg px-4 py-2 text-sm font-medium text-slate-300 hover:text-white"
+      >
+        Login
+      </a>
+
+      <a
+        routerLink="/register"
+        class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold transition hover:bg-indigo-400"
+      >
+        Get Started
+      </a>
+    </div>
+
+  </nav>
+
+  <!-- Hero -->
+  <main class="mx-auto flex max-w-7xl flex-col items-center px-6 py-28 text-center">
+
+    <div class="mb-8 rounded-full border border-indigo-400/30 bg-indigo-400/10 px-4 py-2 text-sm text-indigo-300">
+      Simplifying application deployments
+    </div>
+
+    <h1 class="max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+      Deploy your applications.
+      <span class="text-indigo-400">Without the complexity.</span>
+    </h1>
+
+    <p class="mt-8 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+      Connect your GitHub repositories, configure your applications,
+      manage domains and deploy your projects from one centralized platform.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+
+      <a
+        routerLink="/register"
+        class="rounded-xl bg-indigo-500 px-8 py-4 font-semibold transition hover:bg-indigo-400"
+      >
+        Start Building
+      </a>
+
+      <a
+        href="#features"
+        class="rounded-xl border border-white/15 px-8 py-4 font-semibold transition hover:bg-white/5"
+      >
+        Explore Features
+      </a>
+
+    </div>
+
+    <!-- Product preview -->
+    <div class="mt-24 w-full max-w-5xl rounded-2xl border border-white/10 bg-slate-900 p-4 shadow-2xl shadow-indigo-500/10 sm:p-8">
+
+      <div class="flex items-center justify-between border-b border-white/10 pb-5">
+
+        <div class="flex items-center gap-3">
+          <div class="h-3 w-3 rounded-full bg-red-400"></div>
+          <div class="h-3 w-3 rounded-full bg-yellow-400"></div>
+          <div class="h-3 w-3 rounded-full bg-green-400"></div>
+        </div>
+
+        <span class="text-sm text-slate-400">DeployFlow Dashboard</span>
+
+        <span class="rounded-full bg-green-400/10 px-3 py-1 text-xs text-green-400">
+          System Ready
+        </span>
+
+      </div>
+
+      <div class="grid gap-4 py-8 text-left sm:grid-cols-3">
+
+        <div class="rounded-xl border border-white/10 bg-slate-800/70 p-5">
+          <p class="text-sm text-slate-400">Projects</p>
+          <h3 class="mt-3 text-3xl font-bold">Manage</h3>
+          <p class="mt-2 text-xs text-slate-500">Your connected repositories</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-slate-800/70 p-5">
+          <p class="text-sm text-slate-400">Deployments</p>
+          <h3 class="mt-3 text-3xl font-bold">Automate</h3>
+          <p class="mt-2 text-xs text-slate-500">Your deployment workflows</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-slate-800/70 p-5">
+          <p class="text-sm text-slate-400">Domains</p>
+          <h3 class="mt-3 text-3xl font-bold">Connect</h3>
+          <p class="mt-2 text-xs text-slate-500">Your custom domains</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Features -->
+  <section id="features" class="mx-auto max-w-7xl px-6 pb-24">
+
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-bold">Everything in one place</h2>
+      <p class="mt-4 text-slate-400">
+        A centralized platform for managing your deployments.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+
+      <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
+        <h3 class="text-xl font-semibold">GitHub Integration</h3>
+        <p class="mt-4 leading-7 text-slate-400">
+          Connect repositories and manage your application source code.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
+        <h3 class="text-xl font-semibold">Deployment Management</h3>
+        <p class="mt-4 leading-7 text-slate-400">
+          Configure frontend and backend applications and manage deployments.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
+        <h3 class="text-xl font-semibold">Custom Domains</h3>
+        <p class="mt-4 leading-7 text-slate-400">
+          Manage domain configuration for your deployed applications.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="border-t border-white/10 px-6 py-8 text-center text-sm text-slate-500">
+    © 2026 DeployFlow. Built for developers.
+  </footer>
+
+</div>
