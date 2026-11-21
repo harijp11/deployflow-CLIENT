@@ -17,6 +17,13 @@ export const routes: Routes = [
     title: 'DeployFlow | Login',
   },
   {
+    path: 'register',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import('./features/auth/register/register').then((m) => m.Register),
+    title: 'DeployFlow | Register',
+  },
+  {
     path: '**',
     redirectTo: '',
   },

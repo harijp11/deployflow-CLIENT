@@ -25,3 +25,24 @@ export interface ApiErrorResponse {
   code?: string;
   field?: string;
 }
+
+export interface RegisterRequest {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  company_name?: string;
+  phone_number?: string;
+}
+
+export interface RegisterResponse {
+  message: string;
+}
+
+export interface VerifyEmailRequest {
+  token: string;
+}
+
+export interface VerifyEmailResponse {
+  message: string;
+}

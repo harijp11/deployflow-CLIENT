@@ -1,0 +1,42 @@
+@if (toastService.toast$ | async; as toast) {
+<div class="fixed top-5 right-5 z-[100] flex w-[calc(100%-2.5rem)] max-w-sm items-start gap-3 rounded-xl border p-4 shadow-2xl"
+    [class.bg-green-950]="toast.type === 'success'" [class.border-green-700]="toast.type === 'success'"
+    [class.bg-red-950]="toast.type === 'error'" [class.border-red-700]="toast.type === 'error'"
+    [class.bg-blue-950]="toast.type === 'info'" [class.border-blue-700]="toast.type === 'info'" role="status"
+    aria-live="polite">
+    <div class="flex-1">
+        <p class="text-sm font-semibold" [class.text-green-400]="toast.type === 'success'"
+            [class.text-red-400]="toast.type === 'error'" [class.text-blue-400]="toast.type === 'info'">
+
+            @if (toast.type === 'success') {
+            Success
+            } @else if (toast.type === 'info') {
+            Information
+            } @else {
+            @switch (toast.statusCode) {
+            @case (400) { Bad Request }
+            @case (401) { Unauthorized }
+            @case (403) { Access Forbidden }
+            @case (404) { Not Found }
+            @case (409) { Conflict }
+            @case (422) { Validation Error }
+            @case (429) { Too Many Requests }
+            @case (500) { Internal Server Error }
+            @case (502) { Bad Gateway }
+            @case (503) { Service Unavailable }
+            @default { Something went wrong }
+            }
+            }
+        </p>
+
+        <p class="mt-1 text-sm text-gray-200">
+            {{ toast.message }}
+        </p>
+    </div>
+
+    <button type="button" (click)="toastService.dismiss()" class="text-gray-400 hover:text-white"
+        aria-label="Dismiss notification">
+        ✕
+    </button>
+</div>
+}
