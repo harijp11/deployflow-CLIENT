@@ -12,6 +12,12 @@ export interface LoginResponse {
   message: string;
   access_token: string;
   refresh_token: string;
+  user: AuthUser;
+}
+
+export interface AuthUser {
+  id: number;
+  email: string;
 }
 
 export interface ApiErrorResponse {
