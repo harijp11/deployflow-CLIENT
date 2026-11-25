@@ -1,31 +1,174 @@
+
 <div class="min-h-screen bg-slate-950 text-white">
 
   <!-- Navigation -->
   <nav class="flex items-center justify-between border-b border-white/10 px-6 py-5 lg:px-16">
 
+    <!-- Logo -->
     <a routerLink="/" class="text-2xl font-bold tracking-tight">
       Deploy<span class="text-indigo-400">Flow</span>
     </a>
 
+    <!-- Navigation Links -->
     <div class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
       <a href="#features" class="transition hover:text-white">Features</a>
       <a href="#about" class="transition hover:text-white">About</a>
     </div>
 
+    <!-- Authentication / Profile -->
     <div class="flex items-center gap-3">
-      <a
-        routerLink="/login"
-        class="rounded-lg px-4 py-2 text-sm font-medium text-slate-300 hover:text-white"
-      >
-        Login
-      </a>
 
-      <a
-        routerLink="/register"
-        class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold transition hover:bg-indigo-400"
-      >
-        Get Started
-      </a>
+      @if (user; as currentUser) {
+
+        <!-- Profile Dropdown Container -->
+        <div
+          class="relative"
+          (mouseenter)="isProfileMenuHovered = true"
+          (mouseleave)="isProfileMenuHovered = false"
+        >
+
+          <!-- Profile Button -->
+          <button
+            type="button"
+            (click)="toggleProfileMenu()"
+            class="flex items-center gap-3 rounded-xl px-3 py-2 transition hover:bg-white/5"
+          >
+
+            <!-- Avatar -->
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 font-bold text-white">
+              {{ userInitial }}
+            </div>
+
+            <!-- User Details -->
+            <div class="hidden text-right sm:block">
+              <!-- <p class="text-sm font-semibold text-white">
+                {{ currentUser.email }}
+              </p> -->
+
+              <!-- <p class="text-xs text-green-400">
+                Logged in
+              </p> -->
+            </div>
+
+            <!-- Dropdown Arrow -->
+            <svg
+              class="h-4 w-4 text-slate-400 transition-transform duration-200"
+              [class.rotate-180]="isProfileMenuOpen || isProfileMenuHovered"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+
+          </button>
+
+          <!-- Dropdown Menu -->
+          @if (isProfileMenuOpen || isProfileMenuHovered) {
+
+            <div
+              class="absolute right-0 top-full z-50 mt-2 w-64 overflow-hidden rounded-xl border border-white/10 bg-slate-900 shadow-2xl shadow-black/40"
+            >
+
+              <!-- User Information -->
+              <div class="border-b border-white/10 p-4">
+
+                <div class="flex items-center gap-3">
+
+                  <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-lg font-bold text-white">
+                    {{ userInitial }}
+                  </div>
+
+                  <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold text-white">
+                      {{ currentUser.email }}
+                    </p>
+
+                    <p class="mt-1 text-xs text-slate-400">
+                      DeployFlow Account
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Menu Options -->
+              <div class="p-2">
+
+                <a
+                  routerLink="/profile"
+                  (click)="isProfileMenuOpen = false"
+                  class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+                >
+                  <span>👤</span>
+                  My Profile
+                </a>
+
+                <a
+                  routerLink="/projects"
+                  (click)="isProfileMenuOpen = false"
+                  class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+                >
+                  <span>📁</span>
+                  My Projects
+                </a>
+
+                <a
+                  routerLink="/settings"
+                  (click)="isProfileMenuOpen = false"
+                  class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+                >
+                  <span>⚙️</span>
+                  Settings
+                </a>
+
+              </div>
+
+              <!-- Logout -->
+              <div class="border-t border-white/10 p-2">
+
+                <button
+                  type="button"
+                  (click)="logout()"
+                  class="flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-500/10"
+                >
+                  <span>↪</span>
+                  Logout
+                </button>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      } @else {
+
+        <!-- Guest Navigation -->
+        <a
+          routerLink="/login"
+          class="rounded-lg px-4 py-2 text-sm font-medium text-slate-300 hover:text-white"
+        >
+          Login
+        </a>
+
+        <a
+          routerLink="/register"
+          class="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold transition hover:bg-indigo-400"
+        >
+          Get Started
+        </a>
+
+      }
+
     </div>
 
   </nav>
@@ -65,7 +208,7 @@
 
     </div>
 
-    <!-- Product preview -->
+    <!-- Product Preview -->
     <div class="mt-24 w-full max-w-5xl rounded-2xl border border-white/10 bg-slate-900 p-4 shadow-2xl shadow-indigo-500/10 sm:p-8">
 
       <div class="flex items-center justify-between border-b border-white/10 pb-5">
@@ -76,7 +219,9 @@
           <div class="h-3 w-3 rounded-full bg-green-400"></div>
         </div>
 
-        <span class="text-sm text-slate-400">DeployFlow Dashboard</span>
+        <span class="text-sm text-slate-400">
+          DeployFlow Dashboard
+        </span>
 
         <span class="rounded-full bg-green-400/10 px-3 py-1 text-xs text-green-400">
           System Ready
@@ -115,6 +260,7 @@
 
     <div class="mb-12 text-center">
       <h2 class="text-3xl font-bold">Everything in one place</h2>
+
       <p class="mt-4 text-slate-400">
         A centralized platform for managing your deployments.
       </p>
@@ -124,6 +270,7 @@
 
       <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
         <h3 class="text-xl font-semibold">GitHub Integration</h3>
+
         <p class="mt-4 leading-7 text-slate-400">
           Connect repositories and manage your application source code.
         </p>
@@ -131,6 +278,7 @@
 
       <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
         <h3 class="text-xl font-semibold">Deployment Management</h3>
+
         <p class="mt-4 leading-7 text-slate-400">
           Configure frontend and backend applications and manage deployments.
         </p>
@@ -138,6 +286,7 @@
 
       <div class="rounded-2xl border border-white/10 bg-slate-900 p-7">
         <h3 class="text-xl font-semibold">Custom Domains</h3>
+
         <p class="mt-4 leading-7 text-slate-400">
           Manage domain configuration for your deployed applications.
         </p>
@@ -147,6 +296,7 @@
 
   </section>
 
+  <!-- Footer -->
   <footer class="border-t border-white/10 px-6 py-8 text-center text-sm text-slate-500">
     © 2026 DeployFlow. Built for developers.
   </footer>
