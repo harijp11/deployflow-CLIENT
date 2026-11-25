@@ -12,6 +12,9 @@ import {
   RegisterResponse,
   VerifyEmailRequest,
   VerifyEmailResponse,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  AuthApiResponse,
 } from '../models/auth.model';
 
 import { TokenStorageService } from './token-storage.service';
@@ -23,12 +26,12 @@ export class AuthService {
   private http = inject(HttpClient);
   private tokenStorage = inject(TokenStorageService);
 
-  private readonly authUrl = environment.services.auth;
+  private readonly authUrl = environment.apiUrl;
 
   // Login
   login(payload: LoginRequest): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(`${this.authUrl}/login`, payload)
+      .post<LoginResponse>(`${this.authUrl}/auth/login`, payload)
       .pipe(
         tap((response) => {
           this.tokenStorage.saveSession({
@@ -43,7 +46,7 @@ export class AuthService {
   // Register
   register(payload: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
-      `${this.authUrl}/register`,
+      `${this.authUrl}/auth/register`,
       payload,
     );
   }
@@ -51,21 +54,42 @@ export class AuthService {
   // Verify Email
   verifyEmail(payload: VerifyEmailRequest): Observable<VerifyEmailResponse> {
     return this.http.post<VerifyEmailResponse>(
-      `${this.authUrl}/verify-email`,
+      `${this.authUrl}/auth/verify-email`,
       payload,
     );
   }
 
   resendVerificationEmail(payload: { email: string }): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
-      `${this.authUrl}/resend-verification`,
+      `${this.authUrl}/auth/resend-verification`,
       payload,
     );
   }
 
+  forgotPassword(email: string) {
+  const payload: ForgotPasswordRequest = { email };
+
+  return this.http.post<AuthApiResponse>(
+    `${this.authUrl}/auth/forgot-password`,
+    payload
+  );
+}
+
+resetPassword(token: string, newPassword: string) {
+  const payload: ResetPasswordRequest = {
+    token,
+    new_password: newPassword,
+  };
+
+  return this.http.post<AuthApiResponse>(
+    `${this.authUrl}/auth/reset-password`,
+    payload
+  );
+}
+
   // Logout
   logout(): Observable<unknown> {
-    return this.http.post(`${this.authUrl}/logout`, null);
+    return this.http.post(`${this.authUrl}/auth/logout`, null);
   }
 
   // Authentication status
@@ -78,3 +102,4 @@ export class AuthService {
     this.tokenStorage.clearSession();
   }
 }
+

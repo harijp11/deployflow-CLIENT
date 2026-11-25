@@ -15,8 +15,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const isAuthRequest = req.url.startsWith(environment.services.auth);
-  const isUserRequest = req.url.startsWith(environment.services.user);
+  const isAuthRequest = req.url.startsWith(environment.apiUrl);
+  const isUserRequest = req.url.startsWith(environment.apiUrl);
 
   // Only attach the token to requests targeting our backend services.
   if (!isAuthRequest && !isUserRequest) {
@@ -34,7 +34,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (
     isAuthRequest &&
-    publicAuthEndpoints.some((endpoint) => req.url.startsWith(`${environment.services.auth}${endpoint}`))
+    publicAuthEndpoints.some((endpoint) => req.url.startsWith(`${environment.apiUrl}${endpoint}`))
   ) {
     return next(req);
   }
